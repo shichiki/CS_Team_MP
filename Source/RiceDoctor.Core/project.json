@@ -3,7 +3,9 @@
 
   "dependencies": {
     "Microsoft.CSharp": "4.0.1",
-    "NETStandard.Library": "1.6.0"
+    "Microsoft.Extensions.DependencyModel": "1.0.0",
+    "NETStandard.Library": "1.6.0",
+    "System.Data.SQLite": "1.0.102"
   },
 
   "frameworks": {

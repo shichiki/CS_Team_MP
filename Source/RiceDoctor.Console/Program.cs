@@ -1,6 +1,4 @@
 ﻿using System.IO;
-using RiceDoctor.Core.Converters;
-using RiceDoctor.Core.Ontology;
 
 namespace RiceDoctor.Console
 {

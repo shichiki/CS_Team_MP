@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Linq;
 using RiceDoctor.Core.Ontology;
 using Attribute = RiceDoctor.Core.Ontology.Attribute;
@@ -42,7 +41,6 @@ namespace RiceDoctor.Core.Converters
                         string iri = declarationElement.Attribute("IRI").Value;
 
                         ontology.Concepts.Add(new Concept {Name = iri.Substring(1, iri.Length - 1)});
-
                     }
                     else if (declarationElement.Name == "{http://www.w3.org/2002/07/owl#}DataProperty")
                     {
@@ -61,7 +59,8 @@ namespace RiceDoctor.Core.Converters
 
         private void AddDataPropertyDomains(XDocument document, Ontology.Ontology ontology)
         {
-            IEnumerable<XElement> dataPropertyDomains = document.Descendants("{http://www.w3.org/2002/07/owl#}DataPropertyDomain");
+            IEnumerable<XElement> dataPropertyDomains =
+                document.Descendants("{http://www.w3.org/2002/07/owl#}DataPropertyDomain");
             foreach (XElement dataPropertyDomain in dataPropertyDomains)
             {
                 XElement dataProperty = dataPropertyDomain.Element("{http://www.w3.org/2002/07/owl#}DataProperty");

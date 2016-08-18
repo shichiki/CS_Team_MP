@@ -6,22 +6,17 @@
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      ontologyIRI="http://www.semanticweb.org/anon/ontologies/2016/7/untitled-ontology-9">
+    <Prefix name="" IRI="http://www.semanticweb.org/anon/ontologies/2016/7/untitled-ontology-9"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
     <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
     <Declaration>
-        <Class IRI="#Fungus"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#BiologicalEnemy"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#ScientificName"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#Disease"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#Attack"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Biocide"/>
@@ -33,17 +28,60 @@
         <DataProperty IRI="#Name"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Virus"/>
+        <DataProperty IRI="#ExpirationDate"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Caterpillar"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#ExpirationDate"/>
+        <Class IRI="#BiologicalEnemy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Fungus"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#ScientificName"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Caterpillar_CuonLaNho"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Virus"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Soil"/>
     </Declaration>
+    <DisjointClasses>
+        <Class IRI="#Biocide"/>
+        <Class IRI="#BiologicalEnemy"/>
+        <Class IRI="#Caterpillar"/>
+        <Class IRI="#Disease"/>
+        <Class IRI="#Fungus"/>
+        <Class IRI="#Soil"/>
+        <Class IRI="#Virus"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="#Caterpillar"/>
+        <NamedIndividual IRI="#Caterpillar_CuonLaNho"/>
+    </ClassAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#Name"/>
+        <NamedIndividual IRI="#Caterpillar_CuonLaNho"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Cuốn lá nhỏ</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ScientificName"/>
+        <NamedIndividual IRI="#Caterpillar_CuonLaNho"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Cnaphalocrocis medinalis</Literal>
+    </DataPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#Attack"/>
+        <Class IRI="#BiologicalEnemy"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#Attack"/>
+        <Class IRI="#Caterpillar"/>
+    </ObjectPropertyRange>
     <DataPropertyDomain>
         <DataProperty IRI="#ExpirationDate"/>
         <Class IRI="#Biocide"/>

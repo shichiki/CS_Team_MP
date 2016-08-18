@@ -6,6 +6,5 @@ namespace RiceDoctor.Core.Ontology
     {
         public List<Concept> Concepts { get; set; }
         public List<Attribute> Attributes { get; set; }
-
     }
 }

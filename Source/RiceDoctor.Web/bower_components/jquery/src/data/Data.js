@@ -112,7 +112,7 @@ define([
                 //   2. The data stored at the key
                 //
                 if (key === undefined ||
-                ((key && typeof key === "string") && value === undefined)) {
+                    ((key && typeof key === "string") && value === undefined)) {
 
                     stored = this.get(owner, key);
 

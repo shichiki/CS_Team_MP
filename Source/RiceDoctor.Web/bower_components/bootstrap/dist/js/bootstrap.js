@@ -383,7 +383,7 @@ if (typeof jQuery === 'undefined') {
     Carousel.prototype.getItemForDirection = function(direction, active) {
         var activeIndex = this.getItemIndex(active)
         var willWrap = (direction == 'prev' && activeIndex === 0) ||
-        (direction == 'next' && activeIndex == (this.$items.length - 1))
+            (direction == 'next' && activeIndex == (this.$items.length - 1))
         if (willWrap && !this.options.wrap) return active
         var delta = direction == 'prev' ? -1 : 1
         var itemIndex = (activeIndex + delta) % this.$items.length
@@ -720,7 +720,7 @@ if (typeof jQuery === 'undefined') {
     function getTargetFromTrigger($trigger) {
         var href
         var target = $trigger.attr('data-target') ||
-        (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+            (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
 
         return $(target)
     }

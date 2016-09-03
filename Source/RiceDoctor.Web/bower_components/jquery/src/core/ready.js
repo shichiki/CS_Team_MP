@@ -65,40 +65,40 @@ define([
 /**
  * The ready event handler and self cleanup method
  */
-function completed() {
-    document.removeEventListener("DOMContentLoaded", completed);
-    window.removeEventListener("load", completed);
-    jQuery.ready();
-}
-
-jQuery.ready.promise = function(obj) {
-    if (!readyList) {
-
-        readyList = jQuery.Deferred();
-
-        // Catch cases where $(document).ready() is called
-        // after the browser event has already occurred.
-        // Support: IE9-10 only
-        // Older IE sometimes signals "interactive" too soon
-        if (document.readyState === "complete" ||
-        (document.readyState !== "loading" && !document.documentElement.doScroll)) {
-
-            // Handle it asynchronously to allow scripts the opportunity to delay ready
-            window.setTimeout(jQuery.ready);
-
-        } else {
-
-            // Use the handy event callback
-            document.addEventListener("DOMContentLoaded", completed);
-
-            // A fallback to window.onload, that will always work
-            window.addEventListener("load", completed);
+        function completed() {
+            document.removeEventListener("DOMContentLoaded", completed);
+            window.removeEventListener("load", completed);
+            jQuery.ready();
         }
-    }
-    return readyList.promise(obj);
-};
+
+        jQuery.ready.promise = function(obj) {
+            if (!readyList) {
+
+                readyList = jQuery.Deferred();
+
+                // Catch cases where $(document).ready() is called
+                // after the browser event has already occurred.
+                // Support: IE9-10 only
+                // Older IE sometimes signals "interactive" too soon
+                if (document.readyState === "complete" ||
+                    (document.readyState !== "loading" && !document.documentElement.doScroll)) {
+
+                    // Handle it asynchronously to allow scripts the opportunity to delay ready
+                    window.setTimeout(jQuery.ready);
+
+                } else {
+
+                    // Use the handy event callback
+                    document.addEventListener("DOMContentLoaded", completed);
+
+                    // A fallback to window.onload, that will always work
+                    window.addEventListener("load", completed);
+                }
+            }
+            return readyList.promise(obj);
+        };
 
 // Kick off the DOM ready check even if the user does not
-jQuery.ready.promise();
+        jQuery.ready.promise();
 
-});
+    });

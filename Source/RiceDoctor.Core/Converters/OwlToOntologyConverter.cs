@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using RiceDoctor.Core.Ontology;
-using Attribute = RiceDoctor.Core.Ontology.Attribute;
 
 namespace RiceDoctor.Core.Converters
 {
@@ -46,12 +46,12 @@ namespace RiceDoctor.Core.Converters
                     {
                         if (ontology.Attributes == null)
                         {
-                            ontology.Attributes = new List<Attribute>();
+                            ontology.Attributes = new List<Ontology.Attribute>();
                         }
 
                         string iri = declarationElement.Attribute("IRI").Value;
 
-                        ontology.Attributes.Add(new Attribute {Name = iri.Substring(1, iri.Length - 1)});
+                        ontology.Attributes.Add(new Ontology.Attribute {Name = iri.Substring(1, iri.Length - 1)});
                     }
                 }
             }
@@ -72,7 +72,7 @@ namespace RiceDoctor.Core.Converters
                 string dataPropertyName = dataPropertyIri.Substring(1, dataPropertyIri.Length - 1);
                 string className = classIri.Substring(1, classIri.Length - 1);
 
-                Attribute attribute = ontology.Attributes.Single(a => a.Name.Equals(dataPropertyName));
+                Ontology.Attribute attribute = ontology.Attributes.Single(a => a.Name.Equals(dataPropertyName));
                 Concept concept = ontology.Concepts.Single(c => c.Name.Equals(className));
 
                 if (concept.Attributes == null)
@@ -100,7 +100,7 @@ namespace RiceDoctor.Core.Converters
 
                 string dataPropertyName = dataPropertyIri.Substring(1, dataPropertyIri.Length - 1);
                 string owlType = dataTypeAbbreviatedIri;
-                string sqlType = null;
+                string sqlType;
 
                 switch (dataTypeAbbreviatedIri)
                 {
@@ -128,7 +128,7 @@ namespace RiceDoctor.Core.Converters
                         throw new Exception();
                 }
 
-                Attribute attribute = ontology.Attributes.Single(a => a.Name.Equals(dataPropertyName));
+                Ontology.Attribute attribute = ontology.Attributes.Single(a => a.Name.Equals(dataPropertyName));
                 attribute.OwlType = owlType;
                 attribute.SqlType = sqlType;
             }

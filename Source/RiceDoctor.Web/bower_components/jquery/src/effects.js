@@ -522,7 +522,7 @@ define([
 
                     for (index = timers.length; index--;) {
                         if (timers[index].elem === this &&
-                        (type == null || timers[index].queue === type)) {
+                            (type == null || timers[index].queue === type)) {
 
                             timers[index].anim.stop(gotoEnd);
                             dequeue = false;

@@ -43,7 +43,7 @@ define([
                 if (nType !== 1 || !jQuery.isXMLDoc(elem)) {
                     name = name.toLowerCase();
                     hooks = jQuery.attrHooks[name] ||
-                    (jQuery.expr.match.bool.test(name) ? boolHook : undefined);
+                        (jQuery.expr.match.bool.test(name) ? boolHook : undefined);
                 }
 
                 if (value !== undefined) {

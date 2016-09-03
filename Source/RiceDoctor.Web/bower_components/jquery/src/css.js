@@ -160,7 +160,7 @@ define([
                 // Check for style in case a browser which returns unreliable values
                 // for getComputedStyle silently falls back to the reliable elem.style
                 valueIsBorderBox = isBorderBox &&
-                (support.boxSizingReliable() || val === elem.style[name]);
+                    (support.boxSizingReliable() || val === elem.style[name]);
 
                 // Normalize "", auto, and prepare for extra
                 val = parseFloat(val) || 0;
@@ -297,7 +297,7 @@ define([
                     style = elem.style;
 
                 name = jQuery.cssProps[origName] ||
-                (jQuery.cssProps[origName] = vendorPropName(origName) || origName);
+                    (jQuery.cssProps[origName] = vendorPropName(origName) || origName);
 
                 // Gets hook for the prefixed version, then unprefixed version
                 hooks = jQuery.cssHooks[name] || jQuery.cssHooks[origName];
@@ -361,7 +361,7 @@ define([
 
                 // Make sure that we're working with the right name
                 name = jQuery.cssProps[origName] ||
-                (jQuery.cssProps[origName] = vendorPropName(origName) || origName);
+                    (jQuery.cssProps[origName] = vendorPropName(origName) || origName);
 
                 // Try prefixed name followed by the unprefixed name
                 hooks = jQuery.cssHooks[name] || jQuery.cssHooks[origName];
@@ -423,8 +423,8 @@ define([
 
                         // Convert to pixels if value adjustment is needed
                         if (subtract &&
-                        (matches = rcssNum.exec(value)) &&
-                        (matches[3] || "px") !== "px") {
+                            (matches = rcssNum.exec(value)) &&
+                            (matches[3] || "px") !== "px") {
 
                             elem.style[name] = value;
                             value = jQuery.css(elem, name);

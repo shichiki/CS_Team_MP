@@ -174,7 +174,7 @@ define([
                         if (deep &&
                             copy &&
                             (jQuery.isPlainObject(copy) ||
-                            (copyIsArray = jQuery.isArray(copy)))) {
+                                (copyIsArray = jQuery.isArray(copy)))) {
 
                             if (copyIsArray) {
                                 copyIsArray = false;

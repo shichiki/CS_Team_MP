@@ -472,7 +472,7 @@ module.exports = function(grunt) {
     }
     grunt.registerTask('test', testSubtasks);
     grunt.registerTask('test-js',
-    ['jshint:core', 'jshint:test', 'jshint:grunt', 'jscs:core', 'jscs:test', 'jscs:grunt', 'qunit']);
+        ['jshint:core', 'jshint:test', 'jshint:grunt', 'jscs:core', 'jscs:test', 'jscs:grunt', 'qunit']);
 
     // JS distribution task.
     grunt.registerTask('dist-js', ['concat', 'uglify:core', 'commonjs']);
@@ -518,7 +518,7 @@ module.exports = function(grunt) {
 
     // Docs task.
     grunt.registerTask('docs-css',
-    ['autoprefixer:docs', 'autoprefixer:examples', 'csscomb:docs', 'csscomb:examples', 'cssmin:docs']);
+        ['autoprefixer:docs', 'autoprefixer:examples', 'csscomb:docs', 'csscomb:examples', 'cssmin:docs']);
     grunt.registerTask('lint-docs-css', ['csslint:docs', 'csslint:examples']);
     grunt.registerTask('docs-js', ['uglify:docsJs', 'uglify:customize']);
     grunt.registerTask('lint-docs-js', ['jshint:assets', 'jscs:assets']);

@@ -35,7 +35,7 @@ define([
                     while ((elem = this[i++])) {
                         curValue = getClass(elem);
                         cur = elem.nodeType === 1 &&
-                        (" " + curValue + " ").replace(rclass, " ");
+                            (" " + curValue + " ").replace(rclass, " ");
 
                         if (cur) {
                             j = 0;
@@ -85,7 +85,7 @@ define([
 
                         // This expression is here for better compressibility (see addClass)
                         cur = elem.nodeType === 1 &&
-                        (" " + curValue + " ").replace(rclass, " ");
+                            (" " + curValue + " ").replace(rclass, " ");
 
                         if (cur) {
                             j = 0;

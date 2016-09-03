@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="131fd900f6d84de5959d3d22ab3c836f" Name="Diagram1">
+        <EntityTypeShape EntityType="RiceModel.ClassAssertion" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.DataPropertyAssertion" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.DataPropertyDomain" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.DataPropertyRange" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.Declaration" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.Keyword" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.ObjectPropertyAssertion" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.ObjectPropertyDomain" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.ObjectPropertyRange" Width="1.5" PointX="3" PointY="21.625" IsExpanded="true" />
+        <AssociationConnector Association="RiceModel.FK_ClassAssertion_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_ClassAssertion_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_DataPropertyAssertion_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_DataPropertyAssertion_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_DataPropertyDomain_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_DataPropertyDomain_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_DataPropertyRange_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_Keyword_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_ObjectPropertyAssertion_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_ObjectPropertyAssertion_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_ObjectPropertyAssertion_2_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_ObjectPropertyDomain_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_ObjectPropertyDomain_1_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_ObjectPropertyRange_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="RiceModel.FK_ObjectPropertyRange_1_0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

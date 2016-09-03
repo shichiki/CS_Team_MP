@@ -11,13 +11,13 @@ namespace RiceDoctor.OntologyManager.Services
     {
         IEnumerable<Entity> GetAll();
 
-        Entity Get(string name);
+        Entity Get(string entityName);
 
         void Add(Entity entity);
 
-        void Update(Entity entity, string oldName);
+        void Update(Entity entity);
 
-        void Delete(string name);
+        void Delete(string entityName);
     }
 
     public class EntityService : IEntityService
@@ -33,44 +33,25 @@ namespace RiceDoctor.OntologyManager.Services
         {
             IEnumerable<Declaration> declarations =
                 _unitOfWork.DeclarationRepository.GetMany(d => d.Type.Equals(DeclarationType.Class.ToString()));
-            if (declarations == null)
-            {
-                return null;
-            }
 
-            IList<Entity> entities = new List<Entity>();
-            foreach (Declaration declaration in declarations)
-            {
-                entities.Add(CreateEntity(declaration));
-            }
-
-            return entities;
+            return declarations?.Select(HelperService.CreateEntity).ToList();
         }
 
-        public Entity Get(string name)
+        public Entity Get(string entityName)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(entityName))
             {
                 throw new Exception("Entity's name cannot be null.");
             }
 
-            string entityIri = name.Trim();
+            Declaration declaration = _unitOfWork.DeclarationRepository.Get(d => d.Iri.Equals(entityName.Trim()));
 
-            Declaration declaration = _unitOfWork.DeclarationRepository.Get(d => d.Iri.Equals(entityIri));
-            if (declaration == null)
-            {
-                return null;
-            }
-
-            return CreateEntity(declaration);
+            return declaration == null ? null : HelperService.CreateEntity(declaration);
         }
 
         public void Add(Entity entity)
         {
-            if (string.IsNullOrEmpty(entity.Name))
-            {
-                throw new Exception("Entity's name cannot be null.");
-            }
+            CheckValidSyntax(entity);
 
             string entiyIri = entity.Name.Trim();
 
@@ -88,42 +69,39 @@ namespace RiceDoctor.OntologyManager.Services
 
             _unitOfWork.DeclarationRepository.Add(declaration);
             _unitOfWork.Save();
+
+            entity.DeclarationId = declaration.Id;
         }
 
-        public void Update(Entity entity, string oldName)
+        public void Update(Entity entity)
         {
-            if (string.IsNullOrEmpty(entity.Name))
+            CheckValidSyntax(entity);
+
+            if (entity.DeclarationId == null)
             {
-                throw new Exception("Entity's name cannot be null.");
+                throw new Exception("Entity's declaration id cannot be null.");
             }
 
-            string entityIri = entity.Name.Trim();
-
-            Declaration declaration =
-                _unitOfWork.DeclarationRepository.Get(
-                    d => d.Iri.Equals(string.IsNullOrEmpty(oldName) ? entityIri : oldName.Trim()));
-
+            Declaration declaration = _unitOfWork.DeclarationRepository.Get(d => d.Id == entity.DeclarationId);
             if (declaration == null)
             {
                 throw new Exception("Entity does not exist.");
             }
 
-            declaration.Iri = entityIri;
+            declaration.Iri = entity.Name.Trim();
 
             _unitOfWork.DeclarationRepository.Update(declaration);
             _unitOfWork.Save();
         }
 
-        public void Delete(string name)
+        public void Delete(string entityName)
         {
-            if (string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(entityName))
             {
                 throw new Exception("Entity's name cannot be null.");
             }
 
-            string entityIri = name.Trim();
-
-            Declaration declaration = _unitOfWork.DeclarationRepository.Get(d => d.Iri.Equals(entityIri));
+            Declaration declaration = _unitOfWork.DeclarationRepository.Get(d => d.Iri.Equals(entityName.Trim()));
             if (declaration == null)
             {
                 throw new Exception("Entity does not exist.");
@@ -133,39 +111,17 @@ namespace RiceDoctor.OntologyManager.Services
             _unitOfWork.Save();
         }
 
-        private static Entity CreateEntity(Declaration declaration)
+        private void CheckValidSyntax(Entity entity)
         {
-            if (declaration == null)
+            if (entity == null)
             {
-                return null;
+                throw new Exception("Entity cannot be null.");
             }
 
-            Entity entity = new Entity
+            if (string.IsNullOrEmpty(entity.Name))
             {
-                Name = declaration.Iri,
-                Instances =
-                    declaration.ClassAssertionClass?.Select(classAssertion => classAssertion.NamedIndividual.Iri)
-                        .ToList()
-            };
-
-            if (declaration.AnnotationAssertion != null)
-            {
-                entity.Annotations = declaration.AnnotationAssertion.Select(annotationAssertion => new Annotation
-                {
-                    AnnotationType =
-                        DefaultValue.AnnotationTypes.FirstOrDefault(
-                            at => at.Value.Equals(annotationAssertion.AnnotationPropertyAbbreviatedIri)).Key,
-                    DataType =
-                        DefaultValue.DataTypes.FirstOrDefault(
-                            dt => dt.Value.Equals(annotationAssertion.LiteralDatatypeIri)).Key,
-                    LanguageType =
-                        DefaultValue.LanguageTypes.FirstOrDefault(
-                            lt => lt.Value.Equals(annotationAssertion.LiteralXmlLang)).Key,
-                    Value = annotationAssertion.LiteralValue
-                }).ToList();
+                throw new Exception("Entity's name cannot be null.");
             }
-
-            return entity;
         }
     }
 }

@@ -8,7 +8,12 @@ namespace RiceDoctor.OntologyManager.Repositories
     {
         private readonly DbContext _dbContext;
 
+        private IRepository<AnnotationAssertion> _annotationAssertion;
+
         private IRepository<Declaration> _declarationRepository;
+
+        public IRepository<AnnotationAssertion> AnnotationAssertion
+            => _annotationAssertion ?? (_annotationAssertion = new GenericRepository<AnnotationAssertion>(_dbContext));
 
         public IRepository<Declaration> DeclarationRepository
             => _declarationRepository ?? (_declarationRepository = new GenericRepository<Declaration>(_dbContext));

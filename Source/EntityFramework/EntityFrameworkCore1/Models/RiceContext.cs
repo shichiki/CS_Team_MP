@@ -24,9 +24,9 @@ namespace EntityFrameworkCore1.Models
 
                 entity.Property(e => e.LiteralXmlLang).IsRequired();
 
-                entity.HasOne(d => d.Literal)
+                entity.HasOne(d => d.Declaration)
                     .WithMany(p => p.AnnotationAssertion)
-                    .HasForeignKey(d => d.LiteralId);
+                    .HasForeignKey(d => d.IriId);
             });
 
             modelBuilder.Entity<ClassAssertion>(entity =>

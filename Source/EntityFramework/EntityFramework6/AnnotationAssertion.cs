@@ -16,7 +16,7 @@ namespace EntityFramework6
     {
         public long Id { get; set; }
         public string AnnotationPropertyAbbreviatedIri { get; set; }
-        public long LiteralId { get; set; }
+        public long IriId { get; set; }
         public string LiteralXmlLang { get; set; }
         public string LiteralDatatypeIri { get; set; }
         public string LiteralValue { get; set; }

@@ -2,9 +2,11 @@
 {
     public class Annotation
     {
+        public long? AnnotationId { get; set; }
+
         public AnnotationType AnnotationType { get; set; }
 
-        public string Name { get; set; }
+        public string Identifier { get; set; }
 
         public DataType DataType { get; set; }
 

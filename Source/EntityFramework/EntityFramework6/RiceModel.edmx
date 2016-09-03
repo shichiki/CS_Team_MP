@@ -11,7 +11,7 @@
           </Key>
           <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AnnotationPropertyAbbreviatedIri" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
-          <Property Name="LiteralId" Type="integer" Nullable="false" />
+          <Property Name="IriId" Type="integer" Nullable="false" />
           <Property Name="LiteralXmlLang" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="LiteralDatatypeIri" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="LiteralValue" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
@@ -91,7 +91,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AnnotationAssertion">
-              <PropertyRef Name="LiteralId" />
+              <PropertyRef Name="IriId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -345,7 +345,7 @@
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AnnotationPropertyAbbreviatedIri" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LiteralId" Type="Int64" Nullable="false" />
+          <Property Name="IriId" Type="Int64" Nullable="false" />
           <Property Name="LiteralXmlLang" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LiteralDatatypeIri" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LiteralValue" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
@@ -455,7 +455,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="AnnotationAssertion">
-              <PropertyRef Name="LiteralId" />
+              <PropertyRef Name="IriId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -709,7 +709,7 @@
               <MappingFragment StoreEntitySet="AnnotationAssertion">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="AnnotationPropertyAbbreviatedIri" ColumnName="AnnotationPropertyAbbreviatedIri" />
-                <ScalarProperty Name="LiteralId" ColumnName="LiteralId" />
+                <ScalarProperty Name="IriId" ColumnName="IriId" />
                 <ScalarProperty Name="LiteralXmlLang" ColumnName="LiteralXmlLang" />
                 <ScalarProperty Name="LiteralDatatypeIri" ColumnName="LiteralDatatypeIri" />
                 <ScalarProperty Name="LiteralValue" ColumnName="LiteralValue" />

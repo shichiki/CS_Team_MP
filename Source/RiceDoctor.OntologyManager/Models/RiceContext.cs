@@ -4,10 +4,21 @@ namespace RiceDoctor.OntologyManager.Models
 {
     public partial class RiceContext : DbContext
     {
+        public string ConnectionString { get; }
+
+        private RiceContext()
+        {
+        }
+
+        public RiceContext(string connectionString)
+        {
+            ConnectionString = connectionString;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlite(@"Filename=G:\Code\CS_Team_MP\SQL\Rice.db");
+            //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+            optionsBuilder.UseSqlite(ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,9 +33,9 @@ namespace RiceDoctor.OntologyManager.Models
 
                 entity.Property(e => e.LiteralXmlLang).IsRequired();
 
-                entity.HasOne(d => d.Literal)
+                entity.HasOne(d => d.Declaration)
                     .WithMany(p => p.AnnotationAssertion)
-                    .HasForeignKey(d => d.LiteralId);
+                    .HasForeignKey(d => d.IriId);
             });
 
             modelBuilder.Entity<ClassAssertion>(entity =>

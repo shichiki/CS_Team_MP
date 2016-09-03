@@ -13,20 +13,21 @@ namespace RiceDoctor.Console
     {
         public static void Main(string[] args)
         {
-            DbContext context = new RiceContext();
+            DbContext context = new RiceContext(@"Filename=G:\Code\CS_Team_MP\SQL\Rice.db");
             UnitOfWork unitOfWork = new UnitOfWork(context);
 
+            IAnnotationService annotationService = new AnnotationService(unitOfWork);
             IDataPropertyService dataService = new DataPropertyService(unitOfWork);
             IEntityService entityService = new EntityService(unitOfWork);
 
-            TestEntityService(entityService);
+            TestServices(entityService);
 
             //string xmlString = File.ReadAllText(@"G:\Code\CS_Team_MP\OWL\RiceOntology.owl");
             //OwlToOntologyConverter converter = new OwlToOntologyConverter();
             //Ontology ontology = converter.Convert(xmlString);
         }
 
-        private static bool TestEntityService(IEntityService entityService)
+        private static bool TestServices(IEntityService entityService)
         {
             try
             {
@@ -40,15 +41,15 @@ namespace RiceDoctor.Console
                 // Get all entities
                 IEnumerable<Entity> entities = entityService.GetAll();
 
-                // Update entity, if updating new name must require old name
+                // Update entity
                 disease.Name = "Disease!";
-                entityService.Update(disease, "Disease");
+                entityService.Update(disease);
 
                 // Get entities by names
                 Entity existedEntity = entityService.Get("Disease!");
                 Entity notExistedEntity = entityService.Get("Pencil");
 
-                // Delete entity by name
+                // Delete entity by name, with cascade deletion
                 entityService.Delete("Disease!");
 
                 return true;

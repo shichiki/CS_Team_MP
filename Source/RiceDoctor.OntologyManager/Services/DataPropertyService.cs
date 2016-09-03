@@ -37,9 +37,7 @@ namespace RiceDoctor.OntologyManager.Services
             {
                 dataProperties.Add(new DataProperty
                 {
-                    Name = declaration.Iri,
-                    VietnameseName = declaration.Keyword.VietnameseName,
-                    Definition = declaration.Keyword.Definition
+                    Name = declaration.Iri
                 });
             }
 
@@ -48,7 +46,7 @@ namespace RiceDoctor.OntologyManager.Services
 
         public IEnumerable<Entity> GetDomains(string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrEmpty(name))
             {
                 throw new Exception("Data property's name cannot be null.");
             }
@@ -73,9 +71,7 @@ namespace RiceDoctor.OntologyManager.Services
 
                 entities.Add(new Entity
                 {
-                    Name = entityDeclaration.Iri,
-                    VietnameseName = entityDeclaration.Keyword.VietnameseName,
-                    Definition = entityDeclaration.Keyword.Definition
+                    Name = entityDeclaration.Iri
                 });
             }
 

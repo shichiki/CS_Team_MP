@@ -12,6 +12,21 @@ namespace RiceDoctor.OntologyManager.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AnnotationAssertion>(entity =>
+            {
+                entity.Property(e => e.AnnotationPropertyAbbreviatedIri).IsRequired();
+
+                entity.Property(e => e.LiteralDatatypeIri).IsRequired();
+
+                entity.Property(e => e.LiteralValue).IsRequired();
+
+                entity.Property(e => e.LiteralXmlLang).IsRequired();
+
+                entity.HasOne(d => d.Literal)
+                    .WithMany(p => p.AnnotationAssertion)
+                    .HasForeignKey(d => d.LiteralId);
+            });
+
             modelBuilder.Entity<ClassAssertion>(entity =>
             {
                 entity.HasIndex(e => e.NamedIndividualId)
@@ -77,21 +92,6 @@ namespace RiceDoctor.OntologyManager.Models
                 entity.Property(e => e.Type).IsRequired();
             });
 
-            modelBuilder.Entity<Keyword>(entity =>
-            {
-                entity.HasIndex(e => e.DeclarationId)
-                    .HasName("sqlite_autoindex_Keyword_1")
-                    .IsUnique();
-
-                entity.Property(e => e.Definition).IsRequired();
-
-                entity.Property(e => e.VietnameseName).IsRequired();
-
-                entity.HasOne(d => d.Declaration)
-                    .WithOne(p => p.Keyword)
-                    .HasForeignKey<Keyword>(d => d.DeclarationId);
-            });
-
             modelBuilder.Entity<ObjectPropertyAssertion>(entity =>
             {
                 entity.HasOne(d => d.NamedIndividualId1Navigation)
@@ -130,12 +130,12 @@ namespace RiceDoctor.OntologyManager.Models
             });
         }
 
+        public virtual DbSet<AnnotationAssertion> AnnotationAssertion { get; set; }
         public virtual DbSet<ClassAssertion> ClassAssertion { get; set; }
         public virtual DbSet<DataPropertyAssertion> DataPropertyAssertion { get; set; }
         public virtual DbSet<DataPropertyDomain> DataPropertyDomain { get; set; }
         public virtual DbSet<DataPropertyRange> DataPropertyRange { get; set; }
         public virtual DbSet<Declaration> Declaration { get; set; }
-        public virtual DbSet<Keyword> Keyword { get; set; }
         public virtual DbSet<ObjectPropertyAssertion> ObjectPropertyAssertion { get; set; }
         public virtual DbSet<ObjectPropertyDomain> ObjectPropertyDomain { get; set; }
         public virtual DbSet<ObjectPropertyRange> ObjectPropertyRange { get; set; }

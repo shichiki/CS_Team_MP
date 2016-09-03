@@ -25,12 +25,12 @@ namespace EntityFramework6
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<AnnotationAssertion> AnnotationAssertions { get; set; }
         public virtual DbSet<ClassAssertion> ClassAssertions { get; set; }
         public virtual DbSet<DataPropertyAssertion> DataPropertyAssertions { get; set; }
         public virtual DbSet<DataPropertyDomain> DataPropertyDomains { get; set; }
         public virtual DbSet<DataPropertyRange> DataPropertyRanges { get; set; }
         public virtual DbSet<Declaration> Declarations { get; set; }
-        public virtual DbSet<Keyword> Keywords { get; set; }
         public virtual DbSet<ObjectPropertyAssertion> ObjectPropertyAssertions { get; set; }
         public virtual DbSet<ObjectPropertyDomain> ObjectPropertyDomains { get; set; }
         public virtual DbSet<ObjectPropertyRange> ObjectPropertyRanges { get; set; }

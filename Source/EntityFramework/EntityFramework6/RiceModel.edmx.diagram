@@ -4,16 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="131fd900f6d84de5959d3d22ab3c836f" Name="Diagram1">
-        <EntityTypeShape EntityType="RiceModel.ClassAssertion" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RiceModel.DataPropertyAssertion" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RiceModel.DataPropertyDomain" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RiceModel.DataPropertyRange" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RiceModel.Declaration" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RiceModel.Keyword" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="RiceModel.ObjectPropertyAssertion" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RiceModel.ObjectPropertyDomain" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RiceModel.ObjectPropertyRange" Width="1.5" PointX="3" PointY="21.625" IsExpanded="true" />
+      <Diagram DiagramId="de392b4841d440eb9fc1a507b432e03b" Name="Diagram1">
+        <EntityTypeShape EntityType="RiceModel.AnnotationAssertion" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.ClassAssertion" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.DataPropertyAssertion" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.DataPropertyDomain" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.DataPropertyRange" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.Declaration" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.ObjectPropertyAssertion" Width="1.5" PointX="3" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.ObjectPropertyDomain" Width="1.5" PointX="3" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RiceModel.ObjectPropertyRange" Width="1.5" PointX="3" PointY="22" IsExpanded="true" />
+        <AssociationConnector Association="RiceModel.FK_AnnotationAssertion_0_0" ManuallyRouted="false" />
         <AssociationConnector Association="RiceModel.FK_ClassAssertion_0_0" ManuallyRouted="false" />
         <AssociationConnector Association="RiceModel.FK_ClassAssertion_1_0" ManuallyRouted="false" />
         <AssociationConnector Association="RiceModel.FK_DataPropertyAssertion_0_0" ManuallyRouted="false" />
@@ -21,7 +22,6 @@
         <AssociationConnector Association="RiceModel.FK_DataPropertyDomain_0_0" ManuallyRouted="false" />
         <AssociationConnector Association="RiceModel.FK_DataPropertyDomain_1_0" ManuallyRouted="false" />
         <AssociationConnector Association="RiceModel.FK_DataPropertyRange_0_0" ManuallyRouted="false" />
-        <AssociationConnector Association="RiceModel.FK_Keyword_0_0" ManuallyRouted="false" />
         <AssociationConnector Association="RiceModel.FK_ObjectPropertyAssertion_0_0" ManuallyRouted="false" />
         <AssociationConnector Association="RiceModel.FK_ObjectPropertyAssertion_1_0" ManuallyRouted="false" />
         <AssociationConnector Association="RiceModel.FK_ObjectPropertyAssertion_2_0" ManuallyRouted="false" />

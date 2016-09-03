@@ -7,6 +7,7 @@ namespace EntityFrameworkCore1.Models
     {
         public Declaration()
         {
+            AnnotationAssertion = new HashSet<AnnotationAssertion>();
             ClassAssertionClass = new HashSet<ClassAssertion>();
             DataPropertyAssertionDataProperty = new HashSet<DataPropertyAssertion>();
             DataPropertyAssertionNamedIndividual = new HashSet<DataPropertyAssertion>();
@@ -25,6 +26,7 @@ namespace EntityFrameworkCore1.Models
         public string Type { get; set; }
         public string Iri { get; set; }
 
+        public virtual ICollection<AnnotationAssertion> AnnotationAssertion { get; set; }
         public virtual ICollection<ClassAssertion> ClassAssertionClass { get; set; }
         public virtual ClassAssertion ClassAssertionNamedIndividual { get; set; }
         public virtual ICollection<DataPropertyAssertion> DataPropertyAssertionDataProperty { get; set; }
@@ -32,7 +34,6 @@ namespace EntityFrameworkCore1.Models
         public virtual ICollection<DataPropertyDomain> DataPropertyDomainClass { get; set; }
         public virtual ICollection<DataPropertyDomain> DataPropertyDomainDataProperty { get; set; }
         public virtual DataPropertyRange DataPropertyRange { get; set; }
-        public virtual Keyword Keyword { get; set; }
         public virtual ICollection<ObjectPropertyAssertion> ObjectPropertyAssertionNamedIndividualId1Navigation { get; set; }
         public virtual ICollection<ObjectPropertyAssertion> ObjectPropertyAssertionNamedIndividualId2Navigation { get; set; }
         public virtual ICollection<ObjectPropertyAssertion> ObjectPropertyAssertionObjectProperty { get; set; }

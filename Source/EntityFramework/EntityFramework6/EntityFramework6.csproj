@@ -68,6 +68,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnnotationAssertion.cs">
+      <DependentUpon>RiceModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ClassAssertion.cs">
       <DependentUpon>RiceModel.tt</DependentUpon>
     </Compile>
@@ -81,9 +84,6 @@
       <DependentUpon>RiceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Declaration.cs">
-      <DependentUpon>RiceModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Keyword.cs">
       <DependentUpon>RiceModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ObjectPropertyAssertion.cs">

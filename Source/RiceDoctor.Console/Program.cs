@@ -30,24 +30,26 @@ namespace RiceDoctor.Console
         {
             try
             {
+                // Add new entity
                 Entity disease = new Entity
                 {
-                    Name = "Disease",
-                    VietnameseName = "Bệnh"
+                    Name = "Disease"
                 };
                 entityService.Add(disease);
 
+                // Get all entities
                 IEnumerable<Entity> entities = entityService.GetAll();
 
-                disease.Definition = "A disease is a particular abnormal condition," +
-                                     " a disorder of a structure or function," +
-                                     " that affects part or all of an organism.";
-                entityService.Update(disease);
+                // Update entity, if updating new name must require old name
+                disease.Name = "Disease!";
+                entityService.Update(disease, "Disease");
 
-                Entity existedEntity = entityService.Get("Disease");
+                // Get entities by names
+                Entity existedEntity = entityService.Get("Disease!");
                 Entity notExistedEntity = entityService.Get("Pencil");
 
-                entityService.Delete("Disease");
+                // Delete entity by name
+                entityService.Delete("Disease!");
 
                 return true;
             }

@@ -17,6 +17,7 @@ namespace EntityFramework6
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Declaration()
         {
+            this.AnnotationAssertions = new HashSet<AnnotationAssertion>();
             this.ClassAssertions = new HashSet<ClassAssertion>();
             this.ClassAssertions1 = new HashSet<ClassAssertion>();
             this.DataPropertyAssertions = new HashSet<DataPropertyAssertion>();
@@ -24,7 +25,6 @@ namespace EntityFramework6
             this.DataPropertyDomains = new HashSet<DataPropertyDomain>();
             this.DataPropertyDomains1 = new HashSet<DataPropertyDomain>();
             this.DataPropertyRanges = new HashSet<DataPropertyRange>();
-            this.Keywords = new HashSet<Keyword>();
             this.ObjectPropertyAssertions = new HashSet<ObjectPropertyAssertion>();
             this.ObjectPropertyAssertions1 = new HashSet<ObjectPropertyAssertion>();
             this.ObjectPropertyAssertions2 = new HashSet<ObjectPropertyAssertion>();
@@ -39,6 +39,8 @@ namespace EntityFramework6
         public string Iri { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AnnotationAssertion> AnnotationAssertions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassAssertion> ClassAssertions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassAssertion> ClassAssertions1 { get; set; }
@@ -52,8 +54,6 @@ namespace EntityFramework6
         public virtual ICollection<DataPropertyDomain> DataPropertyDomains1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DataPropertyRange> DataPropertyRanges { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Keyword> Keywords { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ObjectPropertyAssertion> ObjectPropertyAssertions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

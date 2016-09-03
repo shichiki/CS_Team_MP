@@ -5,6 +5,17 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="RiceModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=G:\Code\CS_Team_MP\SQL\Rice.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AnnotationAssertion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AnnotationPropertyAbbreviatedIri" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="LiteralId" Type="integer" Nullable="false" />
+          <Property Name="LiteralXmlLang" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="LiteralDatatypeIri" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="LiteralValue" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+        </EntityType>
         <EntityType Name="ClassAssertion">
           <Key>
             <PropertyRef Name="Id" />
@@ -47,15 +58,6 @@
           <Property Name="Type" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="Iri" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
         </EntityType>
-        <EntityType Name="Keyword">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="VietnameseName" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
-          <Property Name="Definition" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
-          <Property Name="DeclarationId" Type="integer" Nullable="false" />
-        </EntityType>
         <EntityType Name="ObjectPropertyAssertion">
           <Key>
             <PropertyRef Name="Id" />
@@ -81,6 +83,18 @@
           <Property Name="ObjectPropertyId" Type="integer" Nullable="false" />
           <Property Name="ClassId" Type="integer" Nullable="false" />
         </EntityType>
+        <Association Name="FK_AnnotationAssertion_0_0">
+          <End Role="Declaration" Type="Self.Declaration" Multiplicity="1" />
+          <End Role="AnnotationAssertion" Type="Self.AnnotationAssertion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Declaration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnnotationAssertion">
+              <PropertyRef Name="LiteralId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ClassAssertion_0_0">
           <End Role="Declaration" Type="Self.Declaration" Multiplicity="1" />
           <End Role="ClassAssertion" Type="Self.ClassAssertion" Multiplicity="*" />
@@ -162,18 +176,6 @@
             </Principal>
             <Dependent Role="DataPropertyRange">
               <PropertyRef Name="DataPropertyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Keyword_0_0">
-          <End Role="Declaration" Type="Self.Declaration" Multiplicity="1" />
-          <End Role="Keyword" Type="Self.Keyword" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Declaration">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Keyword">
-              <PropertyRef Name="DeclarationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -262,15 +264,19 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="RiceModelStoreContainer">
+          <EntitySet Name="AnnotationAssertion" EntityType="Self.AnnotationAssertion" store:Type="Tables" />
           <EntitySet Name="ClassAssertion" EntityType="Self.ClassAssertion" store:Type="Tables" />
           <EntitySet Name="DataPropertyAssertion" EntityType="Self.DataPropertyAssertion" store:Type="Tables" />
           <EntitySet Name="DataPropertyDomain" EntityType="Self.DataPropertyDomain" store:Type="Tables" />
           <EntitySet Name="DataPropertyRange" EntityType="Self.DataPropertyRange" store:Type="Tables" />
           <EntitySet Name="Declaration" EntityType="Self.Declaration" store:Type="Tables" />
-          <EntitySet Name="Keyword" EntityType="Self.Keyword" store:Type="Tables" />
           <EntitySet Name="ObjectPropertyAssertion" EntityType="Self.ObjectPropertyAssertion" store:Type="Tables" />
           <EntitySet Name="ObjectPropertyDomain" EntityType="Self.ObjectPropertyDomain" store:Type="Tables" />
           <EntitySet Name="ObjectPropertyRange" EntityType="Self.ObjectPropertyRange" store:Type="Tables" />
+          <AssociationSet Name="FK_AnnotationAssertion_0_0" Association="Self.FK_AnnotationAssertion_0_0">
+            <End Role="Declaration" EntitySet="Declaration" />
+            <End Role="AnnotationAssertion" EntitySet="AnnotationAssertion" />
+          </AssociationSet>
           <AssociationSet Name="FK_ClassAssertion_0_0" Association="Self.FK_ClassAssertion_0_0">
             <End Role="Declaration" EntitySet="Declaration" />
             <End Role="ClassAssertion" EntitySet="ClassAssertion" />
@@ -298,10 +304,6 @@
           <AssociationSet Name="FK_DataPropertyRange_0_0" Association="Self.FK_DataPropertyRange_0_0">
             <End Role="Declaration" EntitySet="Declaration" />
             <End Role="DataPropertyRange" EntitySet="DataPropertyRange" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Keyword_0_0" Association="Self.FK_Keyword_0_0">
-            <End Role="Declaration" EntitySet="Declaration" />
-            <End Role="Keyword" EntitySet="Keyword" />
           </AssociationSet>
           <AssociationSet Name="FK_ObjectPropertyAssertion_0_0" Association="Self.FK_ObjectPropertyAssertion_0_0">
             <End Role="Declaration" EntitySet="Declaration" />
@@ -337,6 +339,18 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AnnotationAssertion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnnotationPropertyAbbreviatedIri" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LiteralId" Type="Int64" Nullable="false" />
+          <Property Name="LiteralXmlLang" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LiteralDatatypeIri" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LiteralValue" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Declaration" Relationship="Self.FK_AnnotationAssertion_0_0" FromRole="AnnotationAssertion" ToRole="Declaration" />
+        </EntityType>
         <EntityType Name="ClassAssertion">
           <Key>
             <PropertyRef Name="Id" />
@@ -385,6 +399,7 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Iri" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AnnotationAssertions" Relationship="Self.FK_AnnotationAssertion_0_0" FromRole="Declaration" ToRole="AnnotationAssertion" />
           <NavigationProperty Name="ClassAssertions" Relationship="Self.FK_ClassAssertion_0_0" FromRole="Declaration" ToRole="ClassAssertion" />
           <NavigationProperty Name="ClassAssertions1" Relationship="Self.FK_ClassAssertion_1_0" FromRole="Declaration" ToRole="ClassAssertion" />
           <NavigationProperty Name="DataPropertyAssertions" Relationship="Self.FK_DataPropertyAssertion_0_0" FromRole="Declaration" ToRole="DataPropertyAssertion" />
@@ -392,7 +407,6 @@
           <NavigationProperty Name="DataPropertyDomains" Relationship="Self.FK_DataPropertyDomain_0_0" FromRole="Declaration" ToRole="DataPropertyDomain" />
           <NavigationProperty Name="DataPropertyDomains1" Relationship="Self.FK_DataPropertyDomain_1_0" FromRole="Declaration" ToRole="DataPropertyDomain" />
           <NavigationProperty Name="DataPropertyRanges" Relationship="Self.FK_DataPropertyRange_0_0" FromRole="Declaration" ToRole="DataPropertyRange" />
-          <NavigationProperty Name="Keywords" Relationship="Self.FK_Keyword_0_0" FromRole="Declaration" ToRole="Keyword" />
           <NavigationProperty Name="ObjectPropertyAssertions" Relationship="Self.FK_ObjectPropertyAssertion_0_0" FromRole="Declaration" ToRole="ObjectPropertyAssertion" />
           <NavigationProperty Name="ObjectPropertyAssertions1" Relationship="Self.FK_ObjectPropertyAssertion_1_0" FromRole="Declaration" ToRole="ObjectPropertyAssertion" />
           <NavigationProperty Name="ObjectPropertyAssertions2" Relationship="Self.FK_ObjectPropertyAssertion_2_0" FromRole="Declaration" ToRole="ObjectPropertyAssertion" />
@@ -400,16 +414,6 @@
           <NavigationProperty Name="ObjectPropertyDomains1" Relationship="Self.FK_ObjectPropertyDomain_1_0" FromRole="Declaration" ToRole="ObjectPropertyDomain" />
           <NavigationProperty Name="ObjectPropertyRanges" Relationship="Self.FK_ObjectPropertyRange_0_0" FromRole="Declaration" ToRole="ObjectPropertyRange" />
           <NavigationProperty Name="ObjectPropertyRanges1" Relationship="Self.FK_ObjectPropertyRange_1_0" FromRole="Declaration" ToRole="ObjectPropertyRange" />
-        </EntityType>
-        <EntityType Name="Keyword">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VietnameseName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Definition" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DeclarationId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="Declaration" Relationship="Self.FK_Keyword_0_0" FromRole="Keyword" ToRole="Declaration" />
         </EntityType>
         <EntityType Name="ObjectPropertyAssertion">
           <Key>
@@ -443,6 +447,18 @@
           <NavigationProperty Name="Declaration" Relationship="Self.FK_ObjectPropertyRange_0_0" FromRole="ObjectPropertyRange" ToRole="Declaration" />
           <NavigationProperty Name="Declaration1" Relationship="Self.FK_ObjectPropertyRange_1_0" FromRole="ObjectPropertyRange" ToRole="Declaration" />
         </EntityType>
+        <Association Name="FK_AnnotationAssertion_0_0">
+          <End Role="Declaration" Type="Self.Declaration" Multiplicity="1" />
+          <End Role="AnnotationAssertion" Type="Self.AnnotationAssertion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Declaration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AnnotationAssertion">
+              <PropertyRef Name="LiteralId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ClassAssertion_0_0">
           <End Role="Declaration" Type="Self.Declaration" Multiplicity="1" />
           <End Role="ClassAssertion" Type="Self.ClassAssertion" Multiplicity="*" />
@@ -524,18 +540,6 @@
             </Principal>
             <Dependent Role="DataPropertyRange">
               <PropertyRef Name="DataPropertyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Keyword_0_0">
-          <End Role="Declaration" Type="Self.Declaration" Multiplicity="1" />
-          <End Role="Keyword" Type="Self.Keyword" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Declaration">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Keyword">
-              <PropertyRef Name="DeclarationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -624,15 +628,19 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="RiceContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AnnotationAssertions" EntityType="Self.AnnotationAssertion" />
           <EntitySet Name="ClassAssertions" EntityType="Self.ClassAssertion" />
           <EntitySet Name="DataPropertyAssertions" EntityType="Self.DataPropertyAssertion" />
           <EntitySet Name="DataPropertyDomains" EntityType="Self.DataPropertyDomain" />
           <EntitySet Name="DataPropertyRanges" EntityType="Self.DataPropertyRange" />
           <EntitySet Name="Declarations" EntityType="Self.Declaration" />
-          <EntitySet Name="Keywords" EntityType="Self.Keyword" />
           <EntitySet Name="ObjectPropertyAssertions" EntityType="Self.ObjectPropertyAssertion" />
           <EntitySet Name="ObjectPropertyDomains" EntityType="Self.ObjectPropertyDomain" />
           <EntitySet Name="ObjectPropertyRanges" EntityType="Self.ObjectPropertyRange" />
+          <AssociationSet Name="FK_AnnotationAssertion_0_0" Association="Self.FK_AnnotationAssertion_0_0">
+            <End Role="Declaration" EntitySet="Declarations" />
+            <End Role="AnnotationAssertion" EntitySet="AnnotationAssertions" />
+          </AssociationSet>
           <AssociationSet Name="FK_ClassAssertion_0_0" Association="Self.FK_ClassAssertion_0_0">
             <End Role="Declaration" EntitySet="Declarations" />
             <End Role="ClassAssertion" EntitySet="ClassAssertions" />
@@ -660,10 +668,6 @@
           <AssociationSet Name="FK_DataPropertyRange_0_0" Association="Self.FK_DataPropertyRange_0_0">
             <End Role="Declaration" EntitySet="Declarations" />
             <End Role="DataPropertyRange" EntitySet="DataPropertyRanges" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Keyword_0_0" Association="Self.FK_Keyword_0_0">
-            <End Role="Declaration" EntitySet="Declarations" />
-            <End Role="Keyword" EntitySet="Keywords" />
           </AssociationSet>
           <AssociationSet Name="FK_ObjectPropertyAssertion_0_0" Association="Self.FK_ObjectPropertyAssertion_0_0">
             <End Role="Declaration" EntitySet="Declarations" />
@@ -700,6 +704,18 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="RiceModelStoreContainer" CdmEntityContainer="RiceContext">
+          <EntitySetMapping Name="AnnotationAssertions">
+            <EntityTypeMapping TypeName="RiceModel.AnnotationAssertion">
+              <MappingFragment StoreEntitySet="AnnotationAssertion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AnnotationPropertyAbbreviatedIri" ColumnName="AnnotationPropertyAbbreviatedIri" />
+                <ScalarProperty Name="LiteralId" ColumnName="LiteralId" />
+                <ScalarProperty Name="LiteralXmlLang" ColumnName="LiteralXmlLang" />
+                <ScalarProperty Name="LiteralDatatypeIri" ColumnName="LiteralDatatypeIri" />
+                <ScalarProperty Name="LiteralValue" ColumnName="LiteralValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ClassAssertions">
             <EntityTypeMapping TypeName="RiceModel.ClassAssertion">
               <MappingFragment StoreEntitySet="ClassAssertion">
@@ -744,16 +760,6 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Iri" ColumnName="Iri" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Keywords">
-            <EntityTypeMapping TypeName="RiceModel.Keyword">
-              <MappingFragment StoreEntitySet="Keyword">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="VietnameseName" ColumnName="VietnameseName" />
-                <ScalarProperty Name="Definition" ColumnName="Definition" />
-                <ScalarProperty Name="DeclarationId" ColumnName="DeclarationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -12,12 +12,14 @@ namespace EntityFramework6
     using System;
     using System.Collections.Generic;
     
-    public partial class Keyword
+    public partial class AnnotationAssertion
     {
         public long Id { get; set; }
-        public string VietnameseName { get; set; }
-        public string Definition { get; set; }
-        public long DeclarationId { get; set; }
+        public string AnnotationPropertyAbbreviatedIri { get; set; }
+        public long LiteralId { get; set; }
+        public string LiteralXmlLang { get; set; }
+        public string LiteralDatatypeIri { get; set; }
+        public string LiteralValue { get; set; }
     
         public virtual Declaration Declaration { get; set; }
     }

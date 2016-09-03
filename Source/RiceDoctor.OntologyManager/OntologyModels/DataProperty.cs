@@ -1,11 +1,15 @@
-﻿namespace RiceDoctor.OntologyManager.OntologyModels
+﻿using System.Collections.Generic;
+
+namespace RiceDoctor.OntologyManager.OntologyModels
 {
-    public class DataProperty : Keyword
+    public class DataProperty
     {
+        public string Name { get; set; }
+
         public DataType Range { get; set; }
 
-        public DataProperty() : base(DeclarationType.DataProperty)
-        {
-        }
+        public DeclarationType DeclarationType => DeclarationType.DataProperty;
+
+        public IEnumerable<Annotation> Annotations { get; set; }
     }
 }
